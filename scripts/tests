@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo -e '\nRunning tests in server side'
+echo -e '----------------------------\n'
+NODE_ENV=test grunt mochaTest:server
+
+echo -e '\nRunning tests in emulate client side'
+echo -e '------------------------------------\n'
+NODE_ENV=test grunt mochaTest:client
+
+echo -e '\nStarting server and open browser for tests in pure client side'
+echo -e '--------------------------------------------------------------\n'
+node test/client
