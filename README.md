@@ -77,14 +77,13 @@ Parse response to json.
 * `done` Function callback for success responses. Default to `_.noop`.
 * `fail` Function callback for fail responses. Default to `_.noop`.
 
-For more option see [Restler][https://github.com/danwrong/restler] and [jQuery.ajax][http://api.jquery.com/jQuery.ajax/]
+For more option see [Restler](https://github.com/danwrong/restler) and [jQuery.ajax](http://api.jquery.com/jQuery.ajax/)
 
 #### Callback
 
 `function callback(err, response, body)`
 
 * `response` In _server side_ is the restler response Object. In _client side_ is an object with next properties `readyState`, `responseText`, `statusCode`, `statusText`, `status` and `res` (jQuery response)
-  ```
 * `body` Response text. If `parseJSON` options is true, `body` is an Object.
 
 #### Request instance
