@@ -69,8 +69,13 @@ Parse response to json.
 * `headers` Request headers. Default to empty.
 * `parseJSON` Enabled parse to json responses. Default to `false`.
 * `defaultErrorCode` Error code for internal errors. Default to `598`.
+* `timeout` If set, will emit the timeout event when the response does not return within the said value (in ms).
 * `debug` Enabled debug mode. Default to `false`.
 * `logger` Debbuger. Default to `console`.
+
+##### Options :: Server
+
+* `onTimeout` Function callback for timeout responses.
 
 ##### Options :: Client
 
@@ -122,7 +127,7 @@ requshar.get('http://www.google.com.ar', function(err, res, body) {
   }
 });
 
-requshar.post('http://yourpage.com/users, {
+requshar.post('http://yourpage.com/users', {
   data: {
     id: 334,
     name: 'pepito'
@@ -175,4 +180,34 @@ requshar.get('http://www.google.com.ar', function(err, res, body) {
     console.log(body);
   }
 });
+```
+
+### Usage in client side
+
+```html
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Requshar in client side</title>
+  </head>
+  <body>
+    <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/jashkenas/underscore/1.8.3/underscore.js"></script>
+    <script src="https://cdn.rawgit.com/comodinx/requshar/v0.1.1/requshar.js"></script>
+    <script>
+      var requshar = new Requshar({
+        baseUrl: 'https://api.github.com',
+        debug: true
+      });
+
+      requshar.json('/repos/comodinx/requshar', function(err, res, body) {
+        if (err instanceof Error) {
+          alert('Error:' + err.message);
+        } else {
+          alert(JSON.stringify(_.pick(body, 'id', 'name', 'full_name', 'language'), null, '  '));
+        }
+      });
+    </script>
+  </body>
+</html>
 ```

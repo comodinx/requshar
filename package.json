@@ -1,6 +1,6 @@
 {
   "name": "requshar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An HTTP client library for use in server (restler) and client side (jQuery)",
   "main": "requshar.js",
   "scripts": {

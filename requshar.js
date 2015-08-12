@@ -1,5 +1,5 @@
 /*! requshar
-    v0.1.0 (c) Nicolas Molina
+    v0.1.1 (c) Nicolas Molina
     MIT License
 */
 
