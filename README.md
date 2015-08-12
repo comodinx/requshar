@@ -1,7 +1,7 @@
 Requshar [![NPM Version](https://img.shields.io/npm/v/requshar.svg?style=flat)](https://www.npmjs.com/package/requshar)
 ========
 
-An HTTP client library for use in server and client side
+An HTTP client library for use in server (restler) and client side (jQuery)
 
 
 Installing
