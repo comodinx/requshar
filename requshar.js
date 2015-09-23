@@ -1,5 +1,5 @@
 /*! requshar
-    v0.1.1 (c) Nicolas Molina
+    v0.1.2 (c) Nicolas Molina
     MIT License
 */
 
@@ -9,13 +9,26 @@ var isServer = typeof window === 'undefined';
 var root = isServer ? {} : window;
 
 (function umd(name, definition) {
+    var _ = root._;
+    var qs = root.qs;
+
+    if (!_ && require) {
+        _ = require('underscore');
+    }
+    if (!qs && require) {
+        qs = require('querystring');
+    }
+
     if (isServer) {
-        module.exports = definition(require('underscore'), name);
+        module.exports = definition(_, qs, name);
     }
     else {
-        root[name] = definition(root._, name);
+        root[name] = definition(_, qs, name);
+        if (module && module.exports) {
+            module.exports = root[name];
+        }
     }
-})('Requshar', function def(_, name) {
+})('Requshar', function def(_, qs, name) {
 
     var previous = root[name];
     var defaults = {
@@ -57,6 +70,37 @@ var root = isServer ? {} : window;
         }
         subclass.__super__ = parent.prototype;
         return subclass;
+    }
+
+    function params(url, key, value) {
+        var parts = url.split('?');
+        var parameters = {};
+        var out = [];
+
+        out.push(parts.shift());
+        if (parts.length) {
+            parameters = qs.parse(parts.join('?')) || parameters;
+        }
+        if (_.isObject(key)) {
+            parameters = _.extend(parameters, key);
+        }
+        else if (!value && key) {
+            return parameters[key];
+        }
+        else if (key) {
+            parameters[key] = value;
+        }
+        else {
+            return parameters;
+        }
+        if (!_.isEmpty(parameters)) {
+            out.push('?');
+            out.push(qs.stringify(parameters));
+        }
+        if (url.slice(url.length - 1) === '#') {
+            out.push('#');
+        }
+        return out.join('');
     }
 
     // Requshar
@@ -275,7 +319,7 @@ var root = isServer ? {} : window;
             var data;
 
             if (options.query) {
-                options.url = utils.url.params(options.url, options.query);
+                options.url = params(options.url, options.query);
             }
             if (options.data && options.multipart) {
                 data = new FormData();

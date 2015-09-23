@@ -193,7 +193,7 @@ requshar.get('http://www.google.com.ar', function(err, res, body) {
   <body>
     <script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/jashkenas/underscore/1.8.3/underscore.js"></script>
-    <script src="https://cdn.rawgit.com/comodinx/requshar/v0.1.1/requshar.js"></script>
+    <script src="https://cdn.rawgit.com/comodinx/requshar/v0.1.2/requshar.js"></script>
     <script>
       var requshar = new Requshar({
         baseUrl: 'https://api.github.com',
