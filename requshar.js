@@ -12,21 +12,16 @@ var root = isServer ? {} : window;
     var _ = root._;
     var qs = root.qs;
 
-    if (!_ && require) {
+    if (!_ && typeof require !== 'undefined') {
         _ = require('underscore');
     }
-    if (!qs && require) {
+    if (!qs && typeof require !== 'undefined') {
         qs = require('querystring');
     }
 
-    if (isServer) {
-        module.exports = definition(_, qs, name);
-    }
-    else {
-        root[name] = definition(_, qs, name);
-        if (module && module.exports) {
-            module.exports = root[name];
-        }
+    root[name] = definition(_, qs, name);
+    if (module && module.exports) {
+        module.exports = root[name];
     }
 })('Requshar', function def(_, qs, name) {
 
